@@ -1,5 +1,11 @@
 import express from "express";
-import { create, destroy, get, show, update } from "./controller.js";
+import {
+  create,
+  destroy,
+  get,
+  show,
+  update,
+} from "../../controllers/note.controller.js";
 
 const router = express.Router();
 
