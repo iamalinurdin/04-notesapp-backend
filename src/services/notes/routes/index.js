@@ -7,12 +7,16 @@ import {
   update,
 } from "../../controllers/note.controller.js";
 import validate from "../../../middlewares/validate.js";
-import { notePayloadSchema } from "../../../validator/schema.js";
+import {
+  notePayloadSchema,
+  noteQuerySchema,
+} from "../../../validator/schema.js";
+import validateQuery from "../../../middlewares/validateQuery.js";
 
 const router = express.Router();
 
 router.post("/notes", validate(notePayloadSchema), create);
-router.get("/notes", get);
+router.get("/notes", validateQuery(noteQuerySchema), get);
 router.get("/notes/:id", show);
 router.put("/notes/:id", validate(notePayloadSchema), update);
 router.delete("/notes/:id", destroy);

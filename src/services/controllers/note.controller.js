@@ -4,6 +4,14 @@ import { InvariantError, NotFoundError } from "../../exceptions/index.js";
 import response from "../../utils/response.js";
 
 export const get = (req, res) => {
+  const { title = "" } = req.query;
+
+  if (title != "") {
+    const note = notes.filter((note) => note.title == title);
+
+    return response(res, 200, "success", { notes: note });
+  }
+
   return response(res, 200, "success", { notes });
 };
 
