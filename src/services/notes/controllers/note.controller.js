@@ -34,7 +34,7 @@ export const show = async (req, res, next) => {
   const { id } = req.params;
   const { id: owner } = req.user;
 
-  const isOwner = await NoteRepository.verifyNoteOwner(id, owner);
+  const isOwner = await NoteRepository.verifyNoteAccess(id, owner);
 
   if (!isOwner) {
     return next(
@@ -56,7 +56,7 @@ export const update = async (req, res, next) => {
   const { title, tags, body } = req.body;
   const { id: owner } = req.user;
 
-  const isOwner = await NoteRepository.verifyNoteOwner(id, owner);
+  const isOwner = await NoteRepository.verifyNoteAccess(id, owner);
 
   if (!isOwner) {
     return next(
@@ -81,7 +81,7 @@ export const update = async (req, res, next) => {
 export const destroy = async (req, res, next) => {
   const { id } = req.params;
   const { id: owner } = req.user;
-  const isOwner = await NoteRepository.verifyNoteOwner(id, owner);
+  const isOwner = await NoteRepository.verifyNoteAccess(id, owner);
 
   if (!isOwner) {
     return next(
